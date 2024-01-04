@@ -19,8 +19,10 @@ describe('Test SmartContract `BtcDemo`', () => {
         const deployTx = await instance.deploy(1)
         console.log(`Deployed contract "BtcDemo": ${deployTx.id}`)
 
-        // Wait for 10 seconds...
-        await new Promise((resolve) => setTimeout(resolve, 10000))
+        if (process.env.NETWORK == 'testnet') {
+            // Wait for 10 seconds...
+            await new Promise((resolve) => setTimeout(resolve, 10000))
+        }
 
         const call = async () => {
             const callRes = await instance.methods.unlock(
